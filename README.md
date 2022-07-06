@@ -71,6 +71,6 @@ If images are not visible click **Add** -> **By topic** -> **/thermal_image**
 
 Here's ROSbot looking at kettle:
 
-!(rb kettle)[rosbotkettle.png]
+![rb kettle](rosbotkettle.png)
 
-!(rviz kettle)[rviz_kettle.png]
+![rviz kettle](rviz_kettle.png)
