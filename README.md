@@ -10,8 +10,8 @@ Hardware used in this project:
  - [ROSbot PRO](https://husarion.com/manuals/rosbot/#rosbot-pro)
  - [IR Thermal Sensor Array](https://www.melexis.com/en/product/mlx90641/high-operating-temperature-fir-thermal-sensor-array)
  - [Slip Ring](https://www.sparkfun.com/products/13064)
- - [Custom PCB designed in Eagle](#)
- - [Custom enclosure designed in Fusion 360](#)
+ - [Custom PCB designed in Eagle](https://github.com/husarion/heat-follower-robot/tree/main/CAD/PCB)
+ - [Custom enclosure designed in Fusion 360](https://github.com/husarion/heat-follower-robot/tree/main/CAD)
  
 ## Software
 
@@ -43,5 +43,34 @@ Additionally there are 3 parameters
  
 ## Building the project
 
+### Flashing MCU
 
- 
+Open the project with [Visual Studio Code](https://code.visualstudio.com/) with [PlatformIO](https://platformio.org/install/ide?install=vscode) plugin.
+
+**This project is optimized for STM32F4 MCU's - keep that in mind when flashing on your hardware!**
+
+Click **PlatformIO: Upload** button 
+
+### Running on ROSbot
+
+Clone **robot** folder to your ROSbot, connect the Thermal Camera via USB and run
+`docker-compose -f docker-compose.yaml up`
+After downloading all the necessary docker images ROSbot should follow warm objects nearby.
+### Running Rviz on PC
+
+Clone **pc** folder to your PC and run:
+`xhost local:root` 
+and then:
+`docker-compose -f compose.pc.yaml up`
+
+Rviz should now pop up showing ROSbots surroundings in deep infrared.
+
+![rviz](meinir.png)
+
+If images are not visible click **Add** -> **By topic** -> **/thermal_image**
+
+Here's ROSbot looking at kettle:
+
+!(rb kettle)[rosbotkettle.png]
+
+!(rviz kettle)[rviz_kettle.png]
