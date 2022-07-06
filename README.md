@@ -54,13 +54,18 @@ Click **PlatformIO: Upload** button
 ### Running on ROSbot
 
 Clone **robot** folder to your ROSbot, connect the Thermal Camera via USB and run
+
 `docker-compose -f docker-compose.yaml up`
+
 After downloading all the necessary docker images ROSbot should follow warm objects nearby.
 ### Running Rviz on PC
 
 Clone **pc** folder to your PC and run:
+
 `xhost local:root` 
+
 and then:
+
 `docker-compose -f compose.pc.yaml up`
 
 Rviz should now pop up showing ROSbots surroundings in deep infrared.
