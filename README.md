@@ -1,10 +1,10 @@
 # Heat Follower
 
-![3d model](3dmodel.png)
+![3d model](rosbot.png)
 
 ## Description
 
-**Heat Follower** is a robot based on the ROSbot Pro platform, that follows heat by using a 360 degree thermal camera. It utilizes a MLX90641 sensor which is a 16x12 pixels IR sensor array. With some custom hardware it is possible to rotate this sensor and get a surround infrared image.
+**Heat Follower** is a project based on the ROSbot Pro platform, that follows heat by using a 360 degree thermal camera. It utilizes a MLX90641 sensor which is a 16x12 pixels IR sensor array. With some custom hardware it is possible to rotate this sensor and get a surround infrared image.
 
 ## Hardware
 
@@ -22,11 +22,10 @@ Hardware used in this project:
 Software for Thermal Camera is written in [PlatformIO](https://platformio.org/) IDE to ensure compatibility with multiple platforms. MLX90641 [API](https://github.com/melexis/mlx90641-library) is used to ensure proper communication with the IR Sensor. It is slightly modified to support STM32's hardware.
 Micro-ROS libraries are mandatory to communicate with ROSbot.
 
-
 ### ROS2 Python Node
 
-A simple node was written in Python to process the input thermal image with OpenCV and steer the robot. 
-When a heat source is detected, this node sends rotational and linear speed via `/cmd_vel` topic. 
+A simple Python node was written to process the input thermal image with OpenCV and steer the robot. 
+When a heat source is detected, this node sends rotational and linear velocities via `/cmd_vel` topic. 
 
 ### ROS Description
 
@@ -48,6 +47,8 @@ System schematic diagram:
 
 ![diagram](diagram.png)
  
+The camera sends the main topic `/thermal_image` - a raw unprocessed image which is then transformed by `/thermal_subscriber` node. The transformed image published on `/tc_image_devel` containes a normalized image with a contour of an object selected by the algorithm. The angle of a selected object can also be visualized with `/tc_goal_angle` marker that publishes an arrow pointing from **base_link** to the direction of the object.
+
 ## Building the project
 
 ### Flashing MCU
@@ -56,7 +57,7 @@ Open the project with [Visual Studio Code](https://code.visualstudio.com/) with 
 
 **This project is optimized for STM32F4 MCU's - keep that in mind when flashing on your hardware!**
 
-Click **PlatformIO: Upload** button 
+After installing the **PlatformIO** extension to your VSCode, click its icon on the **Activity Bar** then from **Project Tasks** select **General** and **Upload**.
 
 ### Running on ROSbot
 
@@ -71,11 +72,11 @@ Due to issues connected with micro-ros agent, user must **unplug and plug** the 
 
 Clone **pc** folder to your PC and run:
 
-`xhost local:root` 
-
-and then:
-
-`docker-compose -f compose.pc.yaml up`
+```bash
+cd pc
+xhost local:root
+docker-compose -f compose.pc.yaml up
+```
 
 Rviz should now pop up showing ROSbots surroundings in deep infrared.
 
@@ -83,8 +84,8 @@ Rviz should now pop up showing ROSbots surroundings in deep infrared.
 
 If images are not visible click **Add** -> **By topic** -> **/thermal_image**
 
-Here's ROSbot looking at a kettle:
+Here's ROSbot facing a kettle:
 
-![rb kettle](rosbotkettle.jpg)
+![rb kettle](kettle.jpg)
 
 ![rviz kettle](rviz_kettle.png)
