@@ -2,7 +2,7 @@
 
 ## Description
 
-**Heat Follower** is a robot based on the ROSbot Pro platform, that follows heat by using a 360 degree thermal camera.
+**Heat Follower** is a robot based on the ROSbot Pro platform, that follows heat by using a 360 degree thermal camera. It utilizes a MLX90641 sensor which is a 16x12 pixels IR sensor array. With some custom hardware it is possible to rotate this and get a surround infrared image.
 
 ## Hardware
 
@@ -23,7 +23,8 @@ Micro-ROS libraries are mandatory to communicate with ROSbot.
 
 ### ROS2 Python Node
 
-A simple node was written in Python to process the input thermal image and steer the robot.
+A simple node was written in Python to process the input thermal image with OpenCV and steer the robot. 
+When a heat source is detected, this node sends rotational and linear speed via `/cmd_vel` topic. 
 
 ### ROS Description
 
@@ -62,6 +63,8 @@ Clone **robot** folder to your ROSbot, connect the Thermal Camera via USB and ru
 `docker-compose -f docker-compose.yaml up`
 
 After downloading all the necessary docker images ROSbot should follow warm objects nearby.
+
+Due to issues connected with micro-ros agent, user must **unplug and plug** the Thermal Camera to reset the connection before running the docker compose. 
 ### Running Rviz on PC
 
 Clone **pc** folder to your PC and run:
@@ -78,7 +81,7 @@ Rviz should now pop up showing ROSbots surroundings in deep infrared.
 
 If images are not visible click **Add** -> **By topic** -> **/thermal_image**
 
-Here's ROSbot looking at kettle:
+Here's ROSbot looking at a kettle:
 
 ![rb kettle](rosbotkettle.jpg)
 
