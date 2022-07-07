@@ -62,9 +62,10 @@ After installing the **PlatformIO** extension to your VSCode, click its icon on 
 ### Running on ROSbot
 
 Clone **robot** folder to your ROSbot, connect the Thermal Camera via USB and run
-
-`docker-compose -f docker-compose.yaml up`
-
+```bash
+cd robot/
+docker-compose -f docker-compose.yaml up
+```
 After downloading all the necessary docker images ROSbot should follow warm objects nearby.
 
 Due to issues connected with micro-ros agent, user must **unplug and plug** the Thermal Camera to reset the connection before running the docker compose. 
@@ -73,7 +74,7 @@ Due to issues connected with micro-ros agent, user must **unplug and plug** the 
 Clone **pc** folder to your PC and run:
 
 ```bash
-cd pc
+cd pc/
 xhost local:root
 docker-compose -f compose.pc.yaml up
 ```
