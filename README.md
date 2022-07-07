@@ -41,6 +41,10 @@ Additionally there are 3 parameters
  `target_max_temp` | `/thermal_subscriber` | int | Maximum temperature of object
  `go_to_hottest_piont` | `/thermal_subscriber` | bool | If true, robot follows the hottest object. If false, robot follows object which temperature is within `target_min_temp` and `target_max_temp`.
  
+System schematic diagram:
+
+![diagram](diagram.png)
+ 
 ## Building the project
 
 ### Flashing MCU
