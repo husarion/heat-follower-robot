@@ -1,5 +1,7 @@
 # Heat Follower
 
+![3d model](3dmodel.png)
+
 ## Description
 
 **Heat Follower** is a robot based on the ROSbot Pro platform, that follows heat by using a 360 degree thermal camera. It utilizes a MLX90641 sensor which is a 16x12 pixels IR sensor array. With some custom hardware it is possible to rotate this and get a surround infrared image.
